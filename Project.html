@@ -7490,6 +7490,47 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">¶</a></h1><p><strong>NEED AN OPENAI API KEY TO RUN</strong></p>
+<h2 id="Environment-Setup">Environment Setup<a class="anchor-link" href="#Environment-Setup">¶</a></h2><ul>
+<li>Load environment variables using <code>dotenv</code>.</li>
+<li>Import necessary libraries like <code>os</code>, <code>glob</code>, and various modules from <code>langchain</code>.</li>
+</ul>
+<h2 id="Finding-PDF-Files">Finding PDF Files<a class="anchor-link" href="#Finding-PDF-Files">¶</a></h2><ul>
+<li>Function <code>find_pdf_files(directory)</code> lists all PDF files in a specified directory and subdirectories.</li>
+<li>Uses <code>glob.glob</code> for searching and sorts the absolute paths of the PDF files.</li>
+</ul>
+<h2 id="Loading-and-Splitting-Text">Loading and Splitting Text<a class="anchor-link" href="#Loading-and-Splitting-Text">¶</a></h2><ul>
+<li><code>load_and_split(path)</code> loads a PDF and splits its text into chunks.</li>
+<li>Utilizes <code>PyPDFLoader</code> for reading PDF content.</li>
+<li><code>CharacterTextSplitter</code> breaks text into 1000 character chunks, separated by newline (<code>\n</code>).</li>
+</ul>
+<h2 id="Setup-PDF-Files-and-Embeddings">Setup PDF Files and Embeddings<a class="anchor-link" href="#Setup-PDF-Files-and-Embeddings">¶</a></h2><ul>
+<li>Defines a list of file paths to various PDF documents.</li>
+<li>Creates an embedding model using <code>OpenAIEmbeddings</code>.</li>
+</ul>
+<h2 id="Creating-and-Merging-Vector-Stores">Creating and Merging Vector Stores<a class="anchor-link" href="#Creating-and-Merging-Vector-Stores">¶</a></h2><ul>
+<li>For each PDF, the text is loaded, split, and converted into vector representations using <code>FAISS</code>.</li>
+<li>Merges these vector stores into one primary store.</li>
+</ul>
+<h2 id="Saving-and-Loading-Vector-Store">Saving and Loading Vector Store<a class="anchor-link" href="#Saving-and-Loading-Vector-Store">¶</a></h2><ul>
+<li>Saves the merged vector store locally.</li>
+<li>Reloads it using <code>FAISS.load_local</code>.</li>
+</ul>
+<h2 id="Demonstration-with-QA-System">Demonstration with QA System<a class="anchor-link" href="#Demonstration-with-QA-System">¶</a></h2><ul>
+<li>Sets up a QA system using <code>RetrievalQA</code> with an <code>OpenAI</code> language model and the loaded vector store.</li>
+<li>Runs example queries to demonstrate information retrieval from the processed PDF documents.</li>
+</ul>
+<p>This setup establishes a document retrieval system using embeddings and a QA model, capable of answering questions based on content from the loaded PDF documents.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7575,6 +7616,10 @@ a.anchor-link {
     <span class="n">loader</span> <span class="o">=</span> <span class="n">PyPDFLoader</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
     <span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
+    <span class="c1"># A chunk size of 1000 characters offers a balance between granularity and manageability</span>
+    <span class="c1"># It's large enough to contain meaningful units of text (like sentences or paragraphs),</span>
+    <span class="c1"># but small enough to be easily processed by various algorithms</span>
+    <span class="c1"># The absence of overlap means each character in the document is only processed once</span>
     <span class="n">text_splitter</span> <span class="o">=</span> <span class="n">CharacterTextSplitter</span><span class="p">(</span>
             <span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
         <span class="p">)</span>
@@ -7593,10 +7638,8 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">pdf_files</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># "/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/analogue-mind.pdf",</span>
     <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/gray-city.pdf"</span><span class="p">,</span>
     <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/irl.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/joeys-journey.pdf"</span><span class="p">,</span>
     <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/singing-peddler.pdf"</span><span class="p">,</span>
     <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/memoirs.pdf"</span><span class="p">,</span>
     <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/small-little-circle.pdf"</span><span class="p">,</span>
@@ -7620,6 +7663,11 @@ a.anchor-link {
 
 <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">pdf_files</span><span class="p">:</span>
     <span class="n">docs</span> <span class="o">=</span> <span class="n">load_and_split</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    
+    <span class="c1"># I chose to use the FAISS vectorstore because it's the fastest to work with locally as I often</span>
+    <span class="c1"># needed to rebuild the vectorstore when I made changes to the code. With Pinecone, it was harder</span>
+    <span class="c1"># to make changes as I had to reset the vectorstore on the website instead of just deleting the locally</span>
+    <span class="c1"># saved stone (as FAISS manages it)</span>
     <span class="n">vectorstore</span> <span class="o">=</span> <span class="n">FAISS</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
     <span class="n">vectorstores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vectorstore</span><span class="p">)</span>
 </pre></div>
@@ -7736,7 +7784,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The father was sad after receiving the letter because it was the last letter he had from his son, who had been killed two weeks prior.
+<pre> The father was sad after receiving the letter because it was the last letter he would ever receive from his son, who had been shot two weeks earlier.
 </pre>
 </div>
 </div>
@@ -7764,7 +7812,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The patches on people's clothing in the crowded streets of Delhi tell stories of their life hardships and struggles. The diversity and history of these patches reflect the diversity of the city, with its mix of huge mansions and slums, and its long history of people from many different backgrounds living together.
+<pre> The patches on people's clothing in the crowded streets of Delhi tell stories of poverty, of different fabrics from different times, of hand-me-downs, and of people striving to cover up patches that are all too visible. They reflect the diversity and history of the city, of a place full of people with different backgrounds and experiences.
 </pre>
 </div>
 </div>
@@ -7793,7 +7841,7 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-IRL portrays the world post-internet and modern relationships as a place where people can meet and form connections with each other through online interactions, and then meet in person and have a real, meaningful experience together. It shows that even though people may be distant from each other geographically, they can still form strong connections and relationships.
+IRL portrays the world post-internet and modern relationships as interconnected and interdependent. The author describes how two people were connected through the internet and were finally able to meet in person. The internet has connected people in ways which would have been impossible before, allowing them to form relationships which transcend physical barriers.
 </pre>
 </div>
 </div>
@@ -7821,7 +7869,7 @@ IRL portrays the world post-internet and modern relationships as a place where p
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> In "Veracious", the author is mad at his Uncle despite his untimely death because he had been getting his life together in the last few months. The author had looked up to him as a child, and his death has left his mother vulnerable and broken. The author feels that his Uncle was selfish in death for leaving his grandmother alone in the big house and leaving everyone to deal with the loss of two brothers in such a short time. Furthermore, the author feels that his Uncle could have waited to die and allowed his family to spend more time with him. The death of his Uncle has left a deep hole in the author's heart that will never be filled.
+<pre> In "Veracious", the author is mad at his Uncle Scott for leaving his family behind in such a difficult time. The author feels especially hurt as his Uncle had been doing better and making plans for the future, like getting a job and moving out of his family home. The author had looked up to his Uncle as a child, and was disappointed that he had left them all so suddenly. The author felt that his Uncle was selfish for not being able to wait, even in death, and for reducing his mother to a vulnerable state. The author was also angry that his Uncle had left his grandmother, JoJo, all alone in her house with no one to take care of her.
 </pre>
 </div>
 </div>
@@ -7849,8 +7897,35 @@ IRL portrays the world post-internet and modern relationships as a place where p
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The author was very attached to Maggi because she was comforting and understanding in a difficult time. Maggi was present with the author when he was grieving over his student's death and provided him comfort and companionship. He found solace in Maggi's presence and was grateful for her companionship.
+<pre> The author felt a strong connection with Maggi. He found comfort in her presence and in the way she interacted with him. He was able to confide in her and talk to her as if she was an understanding person. He felt like he could share his feelings and emotions with her without judgement, and this made him feel less alone.
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Testing">Testing<a class="anchor-link" href="#Testing">¶</a></h1>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># Fill in with your own prompt</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
