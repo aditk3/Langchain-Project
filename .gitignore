@@ -1,6 +1,5 @@
 .venv
 formatter.py
 .env
-Project.html
 faiss_index_project/*
 *.DS_Store
