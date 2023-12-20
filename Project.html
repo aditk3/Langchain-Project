@@ -7497,7 +7497,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">¶</a></h1><p><strong>NEED AN OPENAI API KEY TO RUN</strong></p>
+<h1 id="Documentation">Documentation<a class="anchor-link" href="#Documentation">¶</a></h1><p><strong>⚠️ NEED AN OPENAI API KEY TO RUN ⚠️</strong></p>
 <h2 id="Environment-Setup">Environment Setup<a class="anchor-link" href="#Environment-Setup">¶</a></h2><ul>
 <li>Load environment variables using <code>dotenv</code>.</li>
 <li>Import necessary libraries like <code>os</code>, <code>glob</code>, and various modules from <code>langchain</code>.</li>
@@ -7637,13 +7637,14 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">pdf_files</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/gray-city.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/irl.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/singing-peddler.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/memoirs.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/small-little-circle.pdf"</span><span class="p">,</span>
-    <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data/veracious.pdf"</span><span class="p">,</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">base_path</span> <span class="o">=</span> <span class="s2">"/Users/aditkapoor/Local Documents/Work/Cognizant/langchain-proj/assets/data"</span>
+<span class="n">pdf_files</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/gray-city.pdf"</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/irl.pdf"</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/singing-peddler.pdf"</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/memoirs.pdf"</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/small-little-circle.pdf"</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_path</span><span class="si">}</span><span class="s2">/veracious.pdf"</span><span class="p">,</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -7684,7 +7685,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">### DEBUG CELL ###</span>
-<span class="c1"># vectorstores[0].docstore._dict</span>
+<span class="n">vectorstores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">docstore</span><span class="o">.</span><span class="n">_dict</span>
 </pre></div>
 </div>
 </div>
@@ -7742,7 +7743,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"Who did Clyde yet at about giving omniscient third person narrators too much information? If you don't know, say you don't know."</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">"Who did Clyde yet at about giving third person narrators too much information? If you don't know, say you don't know."</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7784,7 +7785,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The father was sad after receiving the letter because it was the last letter he would ever receive from his son, who had been shot two weeks earlier.
+<pre> The father was sad after receiving the letter because it was the last letter from his son, who had been shot two weeks earlier while writing the letter.
 </pre>
 </div>
 </div>
@@ -7812,7 +7813,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The patches on people's clothing in the crowded streets of Delhi tell stories of poverty, of different fabrics from different times, of hand-me-downs, and of people striving to cover up patches that are all too visible. They reflect the diversity and history of the city, of a place full of people with different backgrounds and experiences.
+<pre> The patches on people's clothing tell stories of poverty and inequality, of harsh and unfair circumstances, of people living in cramped and overcrowded slums while other people live in huge mansions with luxurious amenities. The patches also reflect the history and diverse culture of the city, with its mix of poverty and wealth, its many languages and religions.
 </pre>
 </div>
 </div>
@@ -7841,7 +7842,7 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
-IRL portrays the world post-internet and modern relationships as interconnected and interdependent. The author describes how two people were connected through the internet and were finally able to meet in person. The internet has connected people in ways which would have been impossible before, allowing them to form relationships which transcend physical barriers.
+IRL showcases how the internet has changed the way people interact and build relationships. It highlights how people can become close friends even if they have never met in person, and how these relationships can be just as meaningful as any other kind of friendship. It also shows how technology has enabled people to quickly and easily connect with one another, no matter where they are in the world.
 </pre>
 </div>
 </div>
@@ -7869,7 +7870,7 @@ IRL portrays the world post-internet and modern relationships as interconnected 
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> In "Veracious", the author is mad at his Uncle Scott for leaving his family behind in such a difficult time. The author feels especially hurt as his Uncle had been doing better and making plans for the future, like getting a job and moving out of his family home. The author had looked up to his Uncle as a child, and was disappointed that he had left them all so suddenly. The author felt that his Uncle was selfish for not being able to wait, even in death, and for reducing his mother to a vulnerable state. The author was also angry that his Uncle had left his grandmother, JoJo, all alone in her house with no one to take care of her.
+<pre> In "Veracious", the author is so mad at his Uncle despite his untimely death for a number of reasons. Firstly, the author felt like his Uncle was selfish for leaving his grandmother, JoJo, alone in the house with no one to take care of her. Secondly, the author felt that his Uncle's death had reduced his mother to a vulnerable and powerless state. Thirdly, his Uncle's death came just two years after the passing of his older brother, making his mother have to deal with two losses in a short period of time. Fourthly, the author was angry that his Uncle had been doing better and was planning to get a job and move out of JoJo's place. Finally, the author felt betrayed because he had looked up to his Uncle as a child and had felt that his Uncle was taking steps to make his life better.
 </pre>
 </div>
 </div>
@@ -7897,7 +7898,7 @@ IRL portrays the world post-internet and modern relationships as interconnected 
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre> The author felt a strong connection with Maggi. He found comfort in her presence and in the way she interacted with him. He was able to confide in her and talk to her as if she was an understanding person. He felt like he could share his feelings and emotions with her without judgement, and this made him feel less alone.
+<pre> The author was deeply attached to Maggi, as she was a source of comfort for him in a difficult time. He felt that she was understanding and intelligent, and he was able to tell her his story without judgement. He found her presence calming and her rhythmic breathing helped him to sleep.
 </pre>
 </div>
 </div>
@@ -7914,7 +7915,7 @@ IRL portrays the world post-internet and modern relationships as interconnected 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7922,10 +7923,23 @@ IRL portrays the world post-internet and modern relationships as interconnected 
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">""</span>  <span class="c1"># Fill in with your own prompt</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="s2">"Who is the current president of the United States"</span>  <span class="c1"># Fill in with your own prompt</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre> I don't know.
+</pre>
 </div>
 </div>
 </div>
